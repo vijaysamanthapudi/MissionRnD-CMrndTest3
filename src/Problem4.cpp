@@ -54,8 +54,9 @@ void order(struct node *root1, struct node  *root2)
 		return;
 	}
 	order(root1, root2->left);
-	insert(root1, root2);
 	order(root1, root2->right);
+	insert(root1, root2);
+	
 
 }
 
