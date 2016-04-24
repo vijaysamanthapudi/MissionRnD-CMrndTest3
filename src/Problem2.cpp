@@ -59,7 +59,8 @@ Difficulty : Medium +
 */
 #include <stdlib.h>
 #include <stdio.h>
-
+void is_equal(struct node_dll *head, struct node *root, int *x);
+void is_equal(struct node_dll **head, struct node *root, int *x);
 struct node_dll{
 	int data;
 	struct node_dll *next;
@@ -72,5 +73,58 @@ struct node{
 };
 
 int is_identical(struct node_dll *head, struct node *root){
-	return -1;
+	
+	/*int sum =0;
+	sum = sum_linked(head);
+	equal(root, &sum);
+	if (sum == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}*/
+	if (head == NULL  && root == NULL)
+	{
+		return -1;
+	}
+	int x = 1;
+	is_equal(&head, root, &x);
+	return x;
 }
+
+void is_equal(struct node_dll **head, struct node *root, int *x)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	is_equal(head, root->left, x);
+	*x = *x && ((*head)->data == root->data);
+	(*head) = (*head)->next;
+	is_equal(head, root->right, x);
+
+}
+
+//void  equal( struct node *root,int *sum)
+//{
+//	if (root == NULL)
+//	{
+//		return;
+//	}
+//	equal(root->left,sum);
+//	*sum = (*sum) - root->data;
+//	equal(root->right, sum);
+//}
+//
+//int sum_linked(struct node_dll *head)
+//{
+//	int x=0;
+//	while (head)
+//	{
+//		x += head->data;
+//		head = head->next;
+//	}
+//	return x;
+//}

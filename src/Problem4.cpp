@@ -29,13 +29,60 @@ Difficulty : Medium -Hard
 */
 #include <stdlib.h>
 #include <stdio.h>
-
+void order(struct node *root1, struct node  *root2);
+void insert(struct node *root1, struct node *root2);
 struct node{
 	int data;
 	struct node *left;
 	struct node *right;
 };
 
-void merge_two_bst(struct node *root1, struct node *root2){
-	
+void merge_two_bst(struct node *root1, struct node *root2)
+{
+	if (root1 == NULL && root2 == NULL)
+	{
+		return;
+	}
+	order(root1, root2);
+}
+
+
+void order(struct node *root1, struct node  *root2)
+{
+	if (root2 == NULL)
+	{
+		return;
+	}
+	order(root1, root2->left);
+	insert(root1, root2);
+	order(root1, root2->right);
+
+}
+
+void insert(struct node *root1, struct node *root2)
+{
+	if (root1->left == NULL || root1->right == NULL)
+	{
+		if (root1->data < root2->data)
+		{
+			root1->right = root2;
+			root1->right->left = NULL;
+			root1->right->right = NULL;
+		}
+		else
+		{
+			root1->left = root2;
+			root1->left->left = NULL;
+			root1->left->right = NULL;
+		}
+	}
+	else if (root1->data < root2->data)
+	{
+		insert(root1->right, root2);
+
+	}
+	else
+	{
+		insert(root1->left, root2);
+	}
 }

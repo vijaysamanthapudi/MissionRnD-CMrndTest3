@@ -50,14 +50,14 @@ Difficulty : Medium
 */
 #include <stdlib.h>;
 #include <stdio.h>
-
+#include<string.h>
 //data can be accessed using root->data;
 struct enode{
 	char data[6];
 	struct enode *left;
 	struct enode *right;
 };
-
+void root_postfix(struct enode *root, char *postfix, int *len);
 /*
 Helper Functions are optional to write 
 */
@@ -67,13 +67,33 @@ int isOperator(char *data){
 }
 int isOperand(char *data){
 	return 0;
+	
 }
 int getOperand(char *data){
-	//converts data string to an integer "123" => 123
-	return 0;
+	int num = 0; 
+
+	for (int i = 0; data[i]; ++i)
+		num = num * 10 + data[i] - '0';
+
+	return num;
 }
 //Helper Functions end
 int solve_tree(struct enode *root){
-    return -1;
+	if (root == NULL)
+	{
+		return -1;
+	}
+	char postfix[15];
+	int len = 0;
+	//root_postfix(root, postfix,&len);
+	return 0;
+
 }
+
+//void root_postfix(struct enode *root, char *postfix,int *len)
+//{
+//	root_postfix(root->right, postfix, len);
+//	strcpy(postfix, root->data);
+//	root_postfix(root->left, postfix, len);
+//}
 

@@ -38,7 +38,7 @@ question .
 
 Difficulty : Easy
 */
-
+void miss(struct node *root, int *x);
 #include <stdlib.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -52,5 +52,26 @@ struct node{
 
 
 int get_missing_value(struct node *root,int n){
-    return -1;
+	if (root == NULL)
+	{
+		return -1;
+	}
+	int x = (n*(n+1))/2;
+	miss(root, &x);
+	return x;
+}
+
+void miss(struct node *root, int *x)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	miss(root->left, x);
+	if (root->data != 0 && root->data != -999)
+	{
+		*x = (*x) - root->data;
+	}
+	
+	miss(root->right, x);
 }
